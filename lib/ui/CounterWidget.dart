@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'package:awok_starter/bloc/NativeBlockProvider.dart';
+import 'package:awok_starter/data/api/HttpManager.dart';
 import 'package:awok_starter/di/DependencyInjection.dart';
 import 'package:awok_starter/entities/CartModel.dart';
 import 'package:flutter/material.dart';
-import 'package:awok_starter/network/HttpManager.dart';
+
 
 class CounterWidget extends StatelessWidget {
   CounterBloc bloc;
