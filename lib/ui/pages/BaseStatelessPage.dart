@@ -5,7 +5,7 @@ abstract class BaseStatelessPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _defaultBody(context);
+    return  _defaultBody(context);
   }
 
 

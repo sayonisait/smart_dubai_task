@@ -2,16 +2,28 @@ import 'package:awok_starter/bloc/HomeBloc.dart';
 import 'package:awok_starter/bloc/NativeBlockProvider.dart';
 import 'package:awok_starter/ui/pages/AccountPage.dart';
 import 'package:awok_starter/ui/pages/BaseStatelessPage.dart';
+import 'package:awok_starter/ui/pages/CartPage.dart';
 import 'package:awok_starter/ui/pages/ProductsPage.dart';
 import 'package:flutter/material.dart';
 
 @immutable
 class HomePage extends BaseStatelessPage {
-  final List<Widget> _children = [AccountPage(), ProductsPage()];
-   HomeBloc _bloc;
+  final List<Widget> _children = [
+    ProductsPage("Products"),
+    CartPage("Cart"),
+    AccountPage("My Account")
+  ];
+  TabController _tabController;
+  PageController _pageController;
+  HomeBloc _bloc;
+
+  HomePage() {
+    _pageController = PageController();
+  }
 
   Widget buildScafold() {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
       appBar: buildAppBar(),
       body: buildBody(),
       bottomNavigationBar: buildBottomNavigation(),
@@ -19,14 +31,11 @@ class HomePage extends BaseStatelessPage {
   }
 
   Widget buildBody() {
-    //return Text('data');
-    return Center(
-        child: StreamBuilder(
-            initialData: 0,
-            stream: _bloc.indexStream,
-            builder: (c, s) {
-              return Center(child: Text('Data ${s.data}'));
-            }));
+    return PageView(
+      children: _children,
+      controller: _pageController,
+      onPageChanged: onTabChanged,
+    );
   }
 
   Widget buildAppBar() {
@@ -36,12 +45,12 @@ class HomePage extends BaseStatelessPage {
   }
 
   Widget buildBottomNavigation() {
-    return StreamBuilder<int>( 
+    return StreamBuilder<int>(
       stream: _bloc.indexStream,
       initialData: 0,
       builder: (c, snapshoot) {
         return BottomNavigationBar(
-          currentIndex: snapshoot.data ,
+          currentIndex: snapshoot.data,
           items: [
             BottomNavigationBarItem(
                 icon: new Icon(Icons.home), title: Text('')),
@@ -58,6 +67,8 @@ class HomePage extends BaseStatelessPage {
   //Page Events
   void onTabChanged(int value) {
     _bloc.ontabChange(value);
+    _pageController.animateToPage(value,
+        duration: Duration(milliseconds: 300), curve: Curves.ease);
   }
 
   @override
