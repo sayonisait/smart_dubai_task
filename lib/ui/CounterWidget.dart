@@ -11,7 +11,7 @@ class CounterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bloc = BlocProviderr.of<CounterBloc>(context);
+    bloc = BlocProvider.of<CounterBloc>(context);
     return getScafold();
   }
 
