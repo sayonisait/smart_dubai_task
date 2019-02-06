@@ -1,7 +1,7 @@
 import 'package:awok_starter/bloc/AppBloc.dart';
 import 'package:awok_starter/bloc/NativeBlockProvider.dart';
 import 'package:awok_starter/di/DependencyInjection.dart';
-import 'package:awok_starter/ui/pages/CountryPage.dart';
+import 'package:awok_starter/ui/pages/ProductDetailsPage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,7 +20,7 @@ class AwokApp extends StatelessWidget {
       ),
       home: BlocProviderr<AppBloc>(
         bloc: AppBloc(),
-        child: CountryPage(),
+        child: ProductDetailsPage(),
       ),
     );
   }
