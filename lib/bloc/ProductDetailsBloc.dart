@@ -12,9 +12,10 @@ class ProductDetaisBloc extends BlocBase {
   ProductDetaisBloc() {
 
       myProduct= ProductDetail();
-      //todo initialise it to empty 
       myProduct.id="";
       myProduct.name="";
+      myProduct.imageUrl="";
+      sink.add(myProduct);
       fetchProductDetails();
   }
 
@@ -24,7 +25,7 @@ class ProductDetaisBloc extends BlocBase {
   }
 
   fetchProductDetails(){
-   sink.add(myProduct);
+   
    Future.delayed(Duration(seconds: 3),(){
      ProductDetail productDetail= ProductDetail();
      productDetail.name="Mione Hero 3, 4G Dual Sim, 32GB, 5.7” IPS, Black";

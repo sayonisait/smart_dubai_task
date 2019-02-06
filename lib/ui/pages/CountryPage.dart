@@ -1,8 +1,8 @@
-import 'package:awok_starter/ui/pages/BasePage.dart';
+import 'package:awok_starter/ui/pages/BaseStatelessPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class CountryPage extends BasePage {
+class CountryPage extends BaseStatelessPage {
   @override
   Widget buildContent() {
     return Center(

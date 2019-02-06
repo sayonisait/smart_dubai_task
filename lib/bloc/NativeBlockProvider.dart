@@ -6,8 +6,8 @@ abstract class BlocBase {
 }
 
 // Generic BLoC provider
-class BlocProviderr<T extends BlocBase> extends StatefulWidget {
-  BlocProviderr({
+class BlocProvider<T extends BlocBase> extends StatefulWidget {
+  BlocProvider({
     Key key,
     @required this.child,
     @required this.bloc,
@@ -20,15 +20,15 @@ class BlocProviderr<T extends BlocBase> extends StatefulWidget {
   _BlocProviderState<T> createState() => _BlocProviderState<T>();
 
   static T of<T extends BlocBase>(BuildContext context){
-    final type = _typeOf<BlocProviderr<T>>();
-    BlocProviderr<T> provider = context.ancestorWidgetOfExactType(type);
+    final type = _typeOf<BlocProvider<T>>();
+    BlocProvider<T> provider = context.ancestorWidgetOfExactType(type);
     return provider.bloc;
   }
 
   static Type _typeOf<T>() => T;
 }
 
-class _BlocProviderState<T> extends State<BlocProviderr<BlocBase>>{
+class _BlocProviderState<T> extends State<BlocProvider<BlocBase>>{
   @override
   void dispose(){
     widget.bloc.dispose();

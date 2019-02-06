@@ -1,6 +1,9 @@
-import 'package:awok_starter/bloc/AppBloc.dart';
+
+import 'package:awok_starter/bloc/HomeBloc.dart';
 import 'package:awok_starter/bloc/NativeBlockProvider.dart';
 import 'package:awok_starter/di/DependencyInjection.dart';
+import 'package:awok_starter/ui/pages/HomePage.dart';
+import 'package:awok_starter/bloc/ProductDetailsBloc.dart';
 import 'package:awok_starter/ui/pages/ProductDetailsPage.dart';
 import 'package:flutter/material.dart';
 
@@ -18,8 +21,8 @@ class AwokApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.amber,
       ),
-      home: BlocProviderr<AppBloc>(
-        bloc: AppBloc(),
+      home: BlocProvider<ProductDetaisBloc>(
+        bloc: ProductDetaisBloc(),
         child: ProductDetailsPage(),
       ),
     );
