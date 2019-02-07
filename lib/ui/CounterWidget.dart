@@ -88,7 +88,7 @@ class CounterWidget extends StatelessWidget {
   }
 
   Widget getCartCount() {
-    return StreamBuilder<CartModel>(
+    return StreamBuilder<Cart>(
       stream: bloc.getCart,
       initialData: null,
       builder: (c, snapshoot) {
@@ -118,10 +118,10 @@ class CounterBloc extends BlocBase {
   StreamSink<User> get updateUser => _userStreamController.sink;
 
   // Screen Data :  Cart Bloc
-  CartModel _cartModel;
-  StreamController _cartStreamController = StreamController<CartModel>();
-  Stream<CartModel> get getCart => _cartStreamController.stream;
-  StreamSink<CartModel> get updateCart => _cartStreamController.sink;
+  Cart _cartModel;
+  StreamController _cartStreamController = StreamController<Cart>();
+  Stream<Cart> get getCart => _cartStreamController.stream;
+  StreamSink<Cart> get updateCart => _cartStreamController.sink;
 
   CounterBloc() {
     init();
@@ -147,7 +147,7 @@ class CounterBloc extends BlocBase {
 
   getCartCount() {
     homeRequest.getHomeProdutc().then((onValue) {
-      _cartModel = CartDT.cartFromJson(onValue);
+      _cartModel = Cart.fromJson(onValue);
       updateCart.add(_cartModel);
     }).catchError((onError) {
       updateCart.addError(onError);

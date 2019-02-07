@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 class HomePage extends BaseStatelessPage {
   final List<Widget> _children = [
     ProductsPage("Products"),
-    CartPage("Cart"),
+    //CartPage("Cart"),
     AccountPage("My Account")
   ];
   TabController _tabController;
