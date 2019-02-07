@@ -1,16 +1,8 @@
-import 'HttpManager.dart';
-//import 'package:http/http.dart' as http;
+import 'package:awok_starter/data/api/HttpManager.dart';
+import 'package:awok_starter/data/api/constant_network.dart';
 
 class Apiprovider {
- Future getUrl(String url, Map<String, String> header, HttpMethods method) async {
-    var networkclassObjres =  await apiManager.makeRequest(method, url);
-    print('cdedeeeeeee$networkclassObjres');
-   return networkclassObjres;
-  }
-
-  getbaseUrl(String url) {
-//
-
-    return "https://ae.awok.com/api/"+url;
+  Future<dynamic> fecthcartResults() async {
+    return apiManager.makeRequest(HttpMethods.GET, APIs().apiCart, null);
   }
 }

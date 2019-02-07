@@ -1,46 +1,34 @@
 import 'dart:async';
-import 'package:awok_starter/data/api/HttpManager.dart';
 import 'package:awok_starter/bloc/NativeBlockProvider.dart';
 import 'package:awok_starter/entities/CartModel.dart';
-
+import 'package:awok_starter/repository/BaseRepository.dart';
+import 'package:awok_starter/di/DependencyInjection.dart';
 
 class CartBloc extends BlocBase {
- Cart products;
- StreamController _cartStreamController = StreamController<Cart>();
- Stream<Cart> get myProducts => _cartStreamController.stream;
- StreamSink<Cart> get updateProduct => _cartStreamController.sink;
+  StreamController<CartModel> _streamController = StreamController();
+  Sink<CartModel> get sink => _streamController.sink;
+  Stream<CartModel> get stream => _streamController.stream;
 
- // int count;
- // final _streamController = StreamController<int>();
- // StreamSink<int> get getCount => _streamController.sink;
- // Stream<int> get myCount => _streamController.stream;
+  CartModel myProduct;
+  CartBloc() {
+    init();
+  }
+  init() {
+    getcartProduts();
+  }
 
- CartBloc() {
-   init();
- }
- init() {
-   //count = 0;
-   getcartProduts();
- }
+  @override
+  void dispose() {
+    _streamController.close();
+  }
 
- // updateProductWithPagination() {
- //   updateProduct.add(products);
- // }
-
- @override
- void dispose() {
-   // TODO: implement dispose
-   _cartStreamController.close();
- }
-
- getcartProduts() async {
-    return await apiManager.makeRequest(HttpMethods.GET, "https://ae.awok.com/api//v2/cart/").then((onValue) {
-      _cartStreamController.sink.add(cartFromJson(onValue));
+  getcartProduts() async {
+    BaseRepository base = Injector().getRepository;
+ base.getCartData().then((onValue) {
+      print(onValue.toString());
+      sink.add(onValue);
     }).catchError((onError) {
-      _cartStreamController.addError(onError.toString());
+      _streamController.addError(onError.toString());
     });
-
-   
-
- }
+  }
 }

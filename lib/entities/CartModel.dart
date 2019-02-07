@@ -4,33 +4,28 @@
 
 import 'dart:convert';
 
-Cart cartFromJson(dynamic str) {
-  final jsonData = str;
-  return Cart.fromJson(jsonData);
+CartModel cartFromJson(dynamic str) {
+  final jsonData = json.decode(str);
+  return CartModel.fromJson(jsonData);
 }
 
-// String cartToJson(Cart data) {
-//  // final dyn = data.toJson();
-//   return json.encode(dyn);
-// }
-
-class Cart {
+class CartModel {
   Api api;
   Status status;
   Output output;
 
-  Cart({
+  CartModel({
     this.api,
     this.status,
     this.output,
   });
 
-  factory Cart.fromJson(Map<String, dynamic> json) => new Cart(
+  factory CartModel.fromJson(Map<String, dynamic> json) => new CartModel(
         api: Api.fromJson(json["API"]),
         status: Status.fromJson(json["STATUS"]),
         output: Output.fromJson(json["OUTPUT"]),
       );
-}//
+} //
 
 class Api {
   String minAppVer;
