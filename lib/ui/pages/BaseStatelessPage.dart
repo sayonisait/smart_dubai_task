@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 abstract class BaseStatelessPage extends StatelessWidget {
-  String _title; 
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -19,4 +21,10 @@ abstract class BaseStatelessPage extends StatelessWidget {
       ),
     );
   }
+
+   
+
+
+
+
 }

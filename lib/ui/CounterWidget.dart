@@ -1,13 +1,15 @@
 import 'dart:async';
 import 'package:awok_starter/bloc/NativeBlockProvider.dart';
 import 'package:awok_starter/data/api/HttpManager.dart';
+import 'package:awok_starter/data/api/constant_network.dart';
 import 'package:awok_starter/di/DependencyInjection.dart';
 import 'package:awok_starter/entities/CartModel.dart';
+import 'package:awok_starter/repository/BaseRepository.dart';
 import 'package:flutter/material.dart';
 
 
 class CounterWidget extends StatelessWidget {
-  CounterBloc bloc;
+ final CounterBloc bloc=CounterBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -156,6 +158,8 @@ class CounterBloc extends BlocBase {
   @override
   void dispose() {
     _streamController.close();
+    _cartStreamController.close();
+    _userStreamController.close();
   }
 }
 
@@ -172,25 +176,14 @@ class User {
   }
 }
 
-abstract class BaseRepository {
-  Future<User> getData();
-}
 
-class ApiRepository extends BaseRepository {
-  @override
-  Future<User> getData() async => await UserNetwork().getNetworkUser();
-}
 
-class MockRepository extends BaseRepository {
-  @override
-  Future<User> getData() async => await UserMock().getMockedUser();
-}
 
 HomeRequest homeRequest = HomeRequest();
 
 class HomeRequest {
   Future getHomeProdutc() async => await apiManager.makeRequest(
-      HttpMethods.GET, "https://ae.awok.com/api//v2/cart/");
+      HttpMethods.GET, APIs().apiCart,null);
 }
 
 class UserNetwork {
