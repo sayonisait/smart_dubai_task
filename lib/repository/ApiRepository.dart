@@ -1,4 +1,7 @@
+import 'package:awok_starter/data/api/DashboardAPIManager.dart';
+import 'package:awok_starter/entities/FlashProducts.dart';
 import 'package:awok_starter/entities/ProductDetail.dart';
+import 'package:awok_starter/entities/Products.dart';
 import 'package:awok_starter/repository/BaseRepository.dart';
 import 'package:awok_starter/ui/CounterWidget.dart';
 import 'package:awok_starter/data/api/ProductAPI.dart';
@@ -22,5 +25,20 @@ class ApiRepository extends BaseRepository {
     return Apiprovider()
         .fecthcartResults()
         .then((onValue) => CartModel.fromJson(onValue));
+  }
+@override
+  Future<Products> getProducts(String page) async {
+    //todo change here
+    return DashboardApiManager()
+        .getHomeAPI(page)
+        .then((onValue) => Products.fromJson(onValue));
+  }
+
+@override
+  Future<FlashProducts> getFlashProducts() async {
+    //todo change here
+    return DashboardApiManager()
+        .getFlashAPI()
+        .then((onValue) => FlashProducts.fromJson(onValue));
   }
 }
