@@ -1,8 +1,8 @@
 import 'package:awok_starter/ui/components/flip_card.dart';
+import 'package:awok_starter/ui/models/BaseModel.dart';
+import 'package:awok_starter/ui/models/CategoryModel.dart';
+import 'package:awok_starter/ui/models/ProductModel.dart';
 import 'package:awok_starter/ui/pages/BaseStatelessPage.dart';
-import 'package:awok_starter/ui/pages/models/BaseModel.dart';
-import 'package:awok_starter/ui/pages/models/CategoryModel.dart';
-import 'package:awok_starter/ui/pages/models/ProductModel.dart';
 import 'package:awok_starter/ui/ui_constants.dart';
 import 'package:awok_starter/ui/widgets/ProductGridTile.dart';
 import 'package:awok_starter/ui/widgets/ProductListTile.dart';

@@ -1,9 +1,7 @@
+import 'package:awok_starter/ui/models/ProductModel.dart';
 import 'package:awok_starter/ui/pages/BaseStatelessPage.dart';
-import 'package:awok_starter/ui/pages/home_products/ProductsPage.dart';
-import 'package:awok_starter/ui/pages/models/ProductModel.dart';
 import 'package:awok_starter/ui/widgets/ListWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class AccountPage extends BaseStatelessPage {
   /** Steps to generate List

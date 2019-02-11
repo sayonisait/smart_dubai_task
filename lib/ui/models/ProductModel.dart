@@ -1,4 +1,6 @@
-import 'package:awok_starter/ui/pages/models/BaseModel.dart';
+
+
+import 'package:awok_starter/ui/models/BaseModel.dart';
 
 class ProductModel extends BaseModel{
   String id ; 

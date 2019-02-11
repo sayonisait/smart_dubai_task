@@ -1,6 +1,4 @@
-
-
-import 'package:awok_starter/ui/pages/models/ProductModel.dart';
+import 'package:awok_starter/ui/models/ProductModel.dart';
 import 'package:flutter/material.dart';
 
 class ProductListTile extends StatelessWidget {

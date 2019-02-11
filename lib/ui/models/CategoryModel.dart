@@ -1,4 +1,5 @@
-import 'package:awok_starter/ui/pages/models/BaseModel.dart';
+
+import 'package:awok_starter/ui/models/BaseModel.dart';
 import 'package:flutter/material.dart';
 
 class CategoryModel extends BaseModel{

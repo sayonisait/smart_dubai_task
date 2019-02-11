@@ -30,4 +30,5 @@ flutter:
   assets:
     - assets/local/localization_ar.json
     - assets/local/localization_en.json
+    - images/awokPlaceholder.png
     
