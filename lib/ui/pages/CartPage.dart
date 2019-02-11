@@ -1,4 +1,5 @@
 import 'package:awok_starter/ui/pages/BaseStatelessPage.dart';
+import 'package:awok_starter/ui/styles/awoktheme.dart';
 import 'package:flutter/material.dart';
 
 class CartPage extends BaseStatelessPage {
@@ -7,6 +8,6 @@ class CartPage extends BaseStatelessPage {
 
   @override
   Widget build(BuildContext context) {
-    return Text(_title);
+    return Center(child: Text(_title,style: textStyle,));
   }
 }

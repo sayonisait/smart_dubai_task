@@ -6,6 +6,7 @@ import 'package:awok_starter/ui/CounterWidget.dart';
 import 'package:awok_starter/ui/pages/AccountPage.dart';
 import 'package:awok_starter/ui/pages/HomePage.dart';
 import 'package:awok_starter/ui/pages/TestPage.dart';
+import 'package:awok_starter/ui/styles/awoktheme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,9 +20,7 @@ class AwokApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Awok - Flutter',
-      theme: ThemeData(
-        primarySwatch: Colors.amber,
-      ),
+      theme: awokTheme,
       home: BlocProvider<HomeBloc>(
         bloc: HomeBloc(),
         child: HomePage(),
