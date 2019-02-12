@@ -8,4 +8,7 @@ class DashboardApiManager {
    Future<dynamic> getFlashAPI() async {
     return apiManager.makeRequest(HttpMethods.GET, APIs().apiFlash, null);
   }
+   Future<dynamic> addToCart(String hash) async {
+    return apiManager.makeRequest(HttpMethods.POST, APIs().addToCart, null);
+  }
 }

@@ -1,13 +1,13 @@
-
 import 'package:awok_starter/bloc/DashboardBloc.dart';
 import 'package:awok_starter/bloc/NativeBlockProvider.dart';
+import 'package:awok_starter/entities/AddToCart.dart';
 import 'package:awok_starter/entities/FlashProducts.dart';
 import 'package:awok_starter/entities/Products.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
   DashboardBloc bloc;
-  
+
   // bool isBannerAvailable = false;
   HomeData data;
 
@@ -32,7 +32,6 @@ class Home extends StatelessWidget {
   }
 
   Widget getBody() {
- 
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
@@ -57,7 +56,6 @@ class Home extends StatelessWidget {
         if (snapshoot.hasData) {
           //data = snapshoot.data.output.data;
           return Container(
-            
             child: Image.network(
               snapshoot.data.output.data.banner.url ?? null,
               fit: BoxFit.fitHeight,
@@ -166,15 +164,24 @@ class Home extends StatelessWidget {
                       width: double.infinity,
                       child: RaisedButton(
                         //Day.monday.toString().split('.')[1];
-                        child: Text(
-                         
-                           data.items[index].cart.title
-                               .toString()
-                              ,
+                        child: Text(data.items[index].cart.title.toString(),
                             style:
                                 TextStyle(fontSize: 16.0, color: Colors.white)),
                         color: Colors.orange,
-                        onPressed: () {},
+                        onPressed: () {
+                          bloc.postAddToCart(
+                              data.items[index].cart.value.toString());
+                          showBottomSheet<void>(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Container(
+                                    height: 100,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(32.0),
+                                      child: addToCart(),
+                                    ));
+                              });
+                        },
                       ),
                     ),
                   ),
@@ -184,6 +191,21 @@ class Home extends StatelessWidget {
           },
         ),
       ],
+    );
+  }
+
+  Widget addToCart() {
+    return StreamBuilder<AddToCart>(
+      stream: bloc.addCart,
+      builder: (c, snapshoot) {
+        if (snapshoot.hasData) {
+          return Text(snapshoot.data.status.message.toString());
+          // getGridview(snapshoot.data.output.data, null);
+        } else
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+      },
     );
   }
 

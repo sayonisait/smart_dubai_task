@@ -1,10 +1,10 @@
 import 'package:awok_starter/bloc/NativeBlockProvider.dart';
 import 'package:awok_starter/di/DependencyInjection.dart';
+import 'package:awok_starter/entities/AddToCart.dart';
 import 'package:awok_starter/entities/FlashProducts.dart';
 import 'package:awok_starter/entities/Products.dart';
 import 'package:awok_starter/repository/BaseRepository.dart';
 import 'dart:async';
-
 
 class DashboardBloc extends BlocBase {
   Products products;
@@ -19,47 +19,27 @@ class DashboardBloc extends BlocBase {
   StreamSink<FlashProducts> get updateFlashProduct =>
       _flashStreamController.sink;
 
+  StreamController _addToCartStreamController = StreamController<AddToCart>();
+  Stream<AddToCart> get addCart => _addToCartStreamController.stream;
+  StreamSink<AddToCart> get updateCartProduct => _addToCartStreamController.sink;
+
   DashboardBloc() {
     init();
   }
 
   init() {
-    //count = 0;
     // _productStreamController.stream.listen(aysha);
-    // getHomeProducts();
-    // getFlashProducts();
-
     getProducts();
     getFlashProducts();
-  }
 
-  // updateProductWithPagination() {
-  //   updateProduct.add(products);
-  // }
+  }
 
   @override
   void dispose() {
     // TODO: implement dispose
     _productStreamController.close();
     _flashStreamController.close();
-  }
-
-  // getHomeProducts() async {
-  //   return await apiManager
-  //       .getHomeAPI('/home/?PAGED=1&IW=295&IH=295&PER_PAGE=20')
-  //       .then((onValue) {
-  //     updateProduct.add(productsFromJson(onValue));
-  //   });
-  // }
-
-  // getFlashProducts() async {
-  //   return await apiManager.getFlashAPI('/flash/').then((onValue) {
-  //     updateFlashProduct.add(flashProductsFromJson(onValue));
-  //   });
-  // }
-
-  aysha(event) {
-    print(event);
+    _addToCartStreamController.close();
   }
 
   getProducts() async {
@@ -72,13 +52,23 @@ class DashboardBloc extends BlocBase {
     });
   }
 
-   getFlashProducts() async {
+  getFlashProducts() async {
     BaseRepository base = Injector().getRepository;
     base.getFlashProducts().then((onValue) {
       print(onValue.toString());
-     updateFlashProduct.add(onValue);
+      updateFlashProduct.add(onValue);
     }).catchError((onError) {
       _flashStreamController.addError(onError.toString());
+    });
+  }
+
+  postAddToCart(String hash) async {
+    BaseRepository base = Injector().getRepository;
+    base.postAddToCart(hash).then((onValue) {
+      print(onValue.toString());
+      updateCartProduct.add(onValue);
+    }).catchError((onError) {
+      _addToCartStreamController.addError(onError.toString());
     });
   }
 }
