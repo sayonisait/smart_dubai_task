@@ -20,6 +20,7 @@ dependencies:
   #App 3rd Parties  
   http: ^0.12.0 #network lib
   cupertino_icons: ^0.1.2
+  carousel_pro: ^0.0.13
 
 dev_dependencies:
   flutter_test:

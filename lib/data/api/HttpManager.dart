@@ -13,7 +13,7 @@ class ApiManager {
     return {
       "Authorization":
           "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiOTg1ODYiLCJ0b2tlbiI6IjkxYzQ0Mjk4Nzg4MDRjNWIxOGFhYjE1M2FhYzU2ZTY1In0.Wo36u205EjqKN1myYb4St0oTC_PiJrLOPNuV6284HZQ",
-     
+      "Content-Type": "application/json"
     };
   }
 
@@ -26,40 +26,8 @@ class ApiManager {
         response = await http.get(uri, headers: getHeader());
         break;
       case HttpMethods.POST:
-       var body = {
-  "hash"  :  "7b224944223a223438323234222c22434e223a3334303433382c2248223a226536393932333630323430303230323332323938393064396532366461326238227d"
-};
-    
-
         response = await http.post(uri,
-            headers: {"Authorization":
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMjQ4NTUyNCIsInRva2VuIjoiODIzZDRiM2NmMGVjZGJlOTc1MWYzODU0MmQ4M2M2M2UifQ.-IbIA9p_gYM2vRR6xU2GNXvnQGz3oiddzPH5iShq_ew"
-    }, body: body);
-     print(response.body);
-
-        // var httpClient = new HttpClient();
-        // var uri = new Uri.https('api.github.com', '/users/1');
-        // var request = await httpClient.postUrl(uri);
-        // request.headers.set('content-type', 'application/json');
-        // request.headers.set('Authorization',
-        //     'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiOTg1ODYiLCJ0b2tlbiI6IjkxYzQ0Mjk4Nzg4MDRjNWIxOGFhYjE1M2FhYzU2ZTY1In0.Wo36u205EjqKN1myYb4St0oTC_PiJrLOPNuV6284HZQ');
-        // request.add(utf8.encode(json.encode(params)));
-        // var response = await request.close();
-        // var responseBody = await response.transform(utf8.decoder).join();
-
-        // return responseBody;
-
-        // HttpClient httpClient = new HttpClient();
-        // HttpClientRequest request = await httpClient.postUrl(Uri.parse(uri));
-        // request.headers.set('content-type', 'application/json');
-        // request.headers.set('Authorization',
-        //     'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiOTg1ODYiLCJ0b2tlbiI6IjkxYzQ0Mjk4Nzg4MDRjNWIxOGFhYjE1M2FhYzU2ZTY1In0.Wo36u205EjqKN1myYb4St0oTC_PiJrLOPNuV6284HZQ');
-        // request.add(utf8.encode(json.encode(params)));
-        // HttpClientResponse response = await request.close();
-        // // todo - you should check the response.statusCode
-        // String reply = await response.transform(utf8.decoder).join();
-        // httpClient.close();
-        //
+            headers: getHeader(), body: utf8.encode(json.encode(params)));
 
         print('MY RES $response');
         break;

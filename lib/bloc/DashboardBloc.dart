@@ -14,7 +14,7 @@ class DashboardBloc extends BlocBase {
   Stream<dynamic> get myProducts => _productStreamController.stream;
   StreamSink<dynamic> get updateProduct => _productStreamController.sink;
 
-  StreamController _flashStreamController = StreamController<FlashProducts>();
+  StreamController<FlashProducts> _flashStreamController = StreamController<FlashProducts>.broadcast();
   Stream<FlashProducts> get myFlashProducts => _flashStreamController.stream;
   StreamSink<FlashProducts> get updateFlashProduct =>
       _flashStreamController.sink;
