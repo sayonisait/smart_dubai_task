@@ -210,7 +210,7 @@ class ProductsPage extends StatelessWidget {
     );
   }
 
-  Widget getHorizontalProducts(Data data) {
+  Widget getHorizontalProducts(FlashData data) {
     return Container(
       height: 320.0,
       child: GridView.builder(

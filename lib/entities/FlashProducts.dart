@@ -103,7 +103,7 @@ class Uri {
 }
 
 class Output {
-    Data data;
+    FlashData data;
     Navigation navigation;
 
     Output({
@@ -112,7 +112,7 @@ class Output {
     });
 
     factory Output.fromJson(Map<String, dynamic> json) => new Output(
-        data: Data.fromJson(json["DATA"]),
+        data: FlashData.fromJson(json["DATA"]),
         navigation: Navigation.fromJson(json["NAVIGATION"]),
     );
 
@@ -122,16 +122,16 @@ class Output {
     };
 }
 
-class Data {
+class FlashData {
     List<Item> items;
     String title;
 
-    Data({
+    FlashData({
         this.items,
         this.title,
     });
 
-    factory Data.fromJson(Map<String, dynamic> json) => new Data(
+    factory FlashData.fromJson(Map<String, dynamic> json) => new FlashData(
         items: new List<Item>.from(json["ITEMS"].map((x) => Item.fromJson(x))),
         title: json["TITLE"],
     );

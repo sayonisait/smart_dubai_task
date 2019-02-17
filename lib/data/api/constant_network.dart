@@ -19,6 +19,10 @@ class ApiResources {
   static const String flash = "/flash/";
   static const String cart = "/v2/cart/";
   static const String yyyy = "/v2/cart/?param1=valu1&param2=valu2";
+//offer
+  static const String offer = "/v2/offers/";
+  //Category
+   static const String category = "/v2/categories/";
 
 }
 
@@ -34,8 +38,9 @@ class APIs {
   String get apiCart => _getEndPointURL(Country.AE) + ApiResources.cart;
   String  apiProductDetail(String productId) => _getEndPointURL(Country.AE) + ApiResources.product+productId;
   String  apiHomeWithPage(String page) => _getEndPointURL(Country.AE) + ApiResources.home+page;
-  //String  addToCart(String hash) => _getEndPointURL(Country.AE) + ApiResources.cart+hash;
   String get addToCart => _getEndPointURL(Country.AE) + ApiResources.cart;
+  String get apiOffer => _getEndPointURL(Country.AE) + ApiResources.offer;
+  String get apiCategory => _getEndPointURL(Country.AE) + ApiResources.category;
   
 
   String _getEndPointURL(Country country) {

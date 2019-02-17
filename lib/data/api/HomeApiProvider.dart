@@ -1,7 +1,7 @@
 import 'package:awok_starter/data/api/HttpManager.dart';
 import 'package:awok_starter/data/api/constant_network.dart';
 
-class DashboardApiManager {
+class HomeApiProvider {
   Future<dynamic> getHomeAPI(String page) async {
     return apiManager.makeRequest(HttpMethods.GET, APIs().apiHomeWithPage(page), null);
   }
@@ -11,4 +11,13 @@ class DashboardApiManager {
    Future<dynamic> addToCart(String hash) async {
     return apiManager.makeRequest(HttpMethods.POST, APIs().addToCart, {"hash":hash});
   }
+  //Offer
+  Future<dynamic> getOfferAPI() async {
+    return apiManager.makeRequest(HttpMethods.GET, APIs().apiOffer, null);
+  }
+  //Category
+  Future<dynamic> getCategoryAPI() async {
+    return apiManager.makeRequest(HttpMethods.GET, APIs().apiCategory, null);
+  }
+
 }

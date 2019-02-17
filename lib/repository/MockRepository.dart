@@ -1,6 +1,8 @@
 
 import 'package:awok_starter/entities/AddToCart.dart';
+import 'package:awok_starter/entities/CategoryModal.dart';
 import 'package:awok_starter/entities/FlashProducts.dart';
+import 'package:awok_starter/entities/Offer.dart';
 import 'package:awok_starter/entities/ProductDetail.dart';
 import 'package:awok_starter/entities/Products.dart';
 import 'package:awok_starter/repository/BaseRepository.dart';
@@ -32,5 +34,14 @@ class MockRepository extends BaseRepository {
   Future<AddToCart> postAddToCart(String hash) {
     return null;
   }
+  @override
+  Future<Offer> getOffer() {
+    return null;
+  }
+  @override
+  Future<Category> getCategories() {
+    return null;
+  }
+
 
 }
