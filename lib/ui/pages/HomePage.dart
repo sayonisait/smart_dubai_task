@@ -16,7 +16,7 @@ class HomePage extends BaseStatelessPage {
     //     child: ProductsPage(),
     //   ),
     
-   // ProductsPage(),
+    ProductsPage(),
     CartPage(),
     AccountPage(""),
     Dashboard()

@@ -9,19 +9,20 @@ import 'dart:async';
 class DashboardBloc extends BlocBase {
   Products products;
   FlashProducts flashProducts;
+  StreamController<FlashProducts> _flashStreamController =
+      StreamController<FlashProducts>.broadcast();
+  Sink<FlashProducts> get updateFlashProduct => _flashStreamController.sink;
+  Stream<FlashProducts> get myFlashProducts => _flashStreamController.stream;
 
   StreamController _productStreamController = StreamController.broadcast();
+  Sink<dynamic> get updateProduct => _productStreamController.sink;
   Stream<dynamic> get myProducts => _productStreamController.stream;
-  StreamSink<dynamic> get updateProduct => _productStreamController.sink;
 
-  StreamController<FlashProducts> _flashStreamController = StreamController<FlashProducts>.broadcast();
-  Stream<FlashProducts> get myFlashProducts => _flashStreamController.stream;
-  StreamSink<FlashProducts> get updateFlashProduct =>
-      _flashStreamController.sink;
+  StreamController<AddToCart> _addToCartStreamController =
+      StreamController<AddToCart>.broadcast();
+  Sink<AddToCart> get updateCartProduct => _addToCartStreamController.sink;
 
-  StreamController _addToCartStreamController = StreamController<AddToCart>();
   Stream<AddToCart> get addCart => _addToCartStreamController.stream;
-  StreamSink<AddToCart> get updateCartProduct => _addToCartStreamController.sink;
 
   DashboardBloc() {
     init();
@@ -29,16 +30,16 @@ class DashboardBloc extends BlocBase {
 
   init() {
     // _productStreamController.stream.listen(aysha);
+     getFlashProducts();
     getProducts();
-    getFlashProducts();
-
+   
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
+     _flashStreamController.close();
     _productStreamController.close();
-    _flashStreamController.close();
     _addToCartStreamController.close();
   }
 

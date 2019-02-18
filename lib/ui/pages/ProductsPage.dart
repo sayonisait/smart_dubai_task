@@ -7,14 +7,14 @@ import 'package:awok_starter/entities/Products.dart';
 import 'package:flutter/material.dart';
 
 class ProductsPage extends StatelessWidget {
-  DashboardBloc bloc;
+ // DashboardBloc bloc;
 
   // bool isBannerAvailable = false;
   HomeData data;
 
   @override
   Widget build(BuildContext context) {
-    bloc = BlocProvider.of<DashboardBloc>(context);
+    //bloc = BlocProvider.of<DashboardBloc>(context);
     return getScaffold();
   }
 
@@ -52,7 +52,7 @@ class ProductsPage extends StatelessWidget {
 
   Widget getBanner() {
     return StreamBuilder(
-      stream: bloc.myProducts,
+      stream: DashboardBloc().myProducts,
       builder: (c, snapshoot) {
         if (snapshoot.hasData) {
           //data = snapshoot.data.output.data;
@@ -73,7 +73,7 @@ class ProductsPage extends StatelessWidget {
 
   Widget getProducts() {
     return StreamBuilder(
-      stream: bloc.myProducts,
+      stream: DashboardBloc().myProducts,
       builder: (c, snapshoot) {
         if (snapshoot.hasData) {
           data = snapshoot.data.output.data;
@@ -89,7 +89,7 @@ class ProductsPage extends StatelessWidget {
 
   Widget getFlashProducts() {
     return StreamBuilder<FlashProducts>(
-      stream: bloc.myFlashProducts,
+      stream: DashboardBloc().myFlashProducts,
       builder: (c, snapshoot) {
         if (snapshoot.hasData)
           return getHorizontalProducts(snapshoot.data.output.data);
@@ -170,7 +170,7 @@ class ProductsPage extends StatelessWidget {
                                 TextStyle(fontSize: 16.0, color: Colors.white)),
                         color: Colors.orange,
                         onPressed: () {
-                          bloc.postAddToCart(
+                          DashboardBloc().postAddToCart(
                               data.items[index].cart.value.toString());
                           showBottomSheet<void>(
                               context: context,
@@ -197,7 +197,7 @@ class ProductsPage extends StatelessWidget {
 
   Widget addToCart() {
     return StreamBuilder<AddToCart>(
-      stream: bloc.addCart,
+      stream: DashboardBloc().addCart,
       builder: (c, snapshoot) {
         if (snapshoot.hasData) {
           return Text(snapshoot.data.status.message.toString());
