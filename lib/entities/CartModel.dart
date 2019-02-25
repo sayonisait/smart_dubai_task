@@ -1,16 +1,12 @@
-
+// To parse this JSON data, do
+//
+//     final cart = cartFromJson(jsonString);
 
 import 'dart:convert';
 
-class CartDT{
-  static CartModel cartFromJson(Map<String, dynamic> json) {
-    return CartModel.fromJson(json);
-  }
-
-  static String cartToJson(CartModel data) {
-    final dyn = data.toJson();
-    return json.encode(dyn);
-  }
+CartModel cartFromJson(dynamic str) {
+  final jsonData = json.decode(str);
+  return CartModel.fromJson(jsonData);
 }
 
 class CartModel {
@@ -29,13 +25,7 @@ class CartModel {
         status: Status.fromJson(json["STATUS"]),
         output: Output.fromJson(json["OUTPUT"]),
       );
-
-  Map<String, dynamic> toJson() => {
-        "API": api.toJson(),
-        "STATUS": status.toJson(),
-        "OUTPUT": output.toJson(),
-      };
-}
+} //
 
 class Api {
   String minAppVer;
@@ -71,18 +61,6 @@ class Api {
         currencySym: json["CURRENCY_SYM"],
         uri: Uri.fromJson(json["URI"]),
       );
-
-  Map<String, dynamic> toJson() => {
-        "MIN_APP_VER": minAppVer,
-        "MIN_APP_VERSION": minAppVersion,
-        "VERSION": version,
-        "FORMAT": format,
-        "LANG": lang,
-        "CURRENCY": currency,
-        "HTTP_METHOD": httpMethod,
-        "CURRENCY_SYM": currencySym,
-        "URI": uri.toJson(),
-      };
 }
 
 class Uri {
@@ -98,11 +76,6 @@ class Uri {
         source: json["SOURCE"],
         parsed: json["PARSED"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "SOURCE": source,
-        "PARSED": parsed,
-      };
 }
 
 class Output {
@@ -118,11 +91,6 @@ class Output {
         data: Data.fromJson(json["DATA"]),
         navigation: Navigation.fromJson(json["NAVIGATION"]),
       );
-
-  Map<String, dynamic> toJson() => {
-        "DATA": data.toJson(),
-        "NAVIGATION": navigation.toJson(),
-      };
 }
 
 class Data {
@@ -139,11 +107,6 @@ class Data {
             json["BASKET"].map((x) => BasketElement.fromJson(x))),
         summary: Summary.fromJson(json["SUMMARY"]),
       );
-
-  Map<String, dynamic> toJson() => {
-        "BASKET": new List<dynamic>.from(basket.map((x) => x.toJson())),
-        "SUMMARY": summary.toJson(),
-      };
 }
 
 class BasketElement {
@@ -163,40 +126,27 @@ class BasketElement {
         summary: Summary.fromJson(json["SUMMARY"]),
         store: Store.fromJson(json["STORE"]),
       );
-
-  Map<String, dynamic> toJson() => {
-        "ITEMS": new List<dynamic>.from(items.map((x) => x.toJson())),
-        "SUMMARY": summary.toJson(),
-        "STORE": store.toJson(),
-      };
 }
 
 class Item {
   ItemBasket basket;
   Prices prices;
   Quantity quantity;
-  Imagee image;
+  Imagess images;
 
   Item({
     this.basket,
     this.prices,
     this.quantity,
-    this.image,
+    this.images,
   });
 
   factory Item.fromJson(Map<String, dynamic> json) => new Item(
         basket: ItemBasket.fromJson(json["BASKET"]),
         prices: Prices.fromJson(json["PRICES"]),
         quantity: Quantity.fromJson(json["QUANTITY"]),
-        image: Imagee.fromJson(json["IMAGE"]),
+        images: Imagess.fromJson(json["IMAGE"]),
       );
-
-  Map<String, dynamic> toJson() => {
-        "BASKET": basket.toJson(),
-        "PRICES": prices.toJson(),
-        "QUANTITY": quantity.toJson(),
-        "IMAGE": image.toJson(),
-      };
 }
 
 class ItemBasket {
@@ -216,25 +166,18 @@ class ItemBasket {
         id: json["ID"],
         productId: json["PRODUCT_ID"],
         name: json["NAME"],
-        fulfilled: json["FULFILLED"] == null ? null : json["FULFILLED"],
+        fulfilled: json["FULFILLED"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "ID": id,
-        "PRODUCT_ID": productId,
-        "NAME": name,
-        "FULFILLED": fulfilled == null ? null : fulfilled,
-      };
 }
 
-class Imagee {
+class Imagess {
   String thumb;
 
-  Imagee({
+  Imagess({
     this.thumb,
   });
 
-  factory Imagee.fromJson(Map<String, dynamic> json) => new Imagee(
+  factory Imagess.fromJson(Map<String, dynamic> json) => new Imagess(
         thumb: json["thumb"],
       );
 
@@ -259,12 +202,6 @@ class Prices {
         current: json["CURRENT"],
         currency: json["CURRENCY"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "MSRP": msrp,
-        "CURRENT": current,
-        "CURRENCY": currency,
-      };
 }
 
 class Quantity {
@@ -280,11 +217,6 @@ class Quantity {
         current: json["CURRENT"],
         max: json["MAX"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "CURRENT": current,
-        "MAX": max,
-      };
 }
 
 class Store {
@@ -300,11 +232,6 @@ class Store {
         storeId: json["STORE_ID"],
         storeName: json["STORE_NAME"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "STORE_ID": storeId,
-        "STORE_NAME": storeName,
-      };
 }
 
 class Summary {
@@ -326,13 +253,6 @@ class Summary {
         currency: json["CURRENCY"],
         stores: json["STORES"] == null ? null : json["STORES"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "ITEMS": items,
-        "PRICE": price,
-        "CURRENCY": currency,
-        "STORES": stores == null ? null : stores,
-      };
 }
 
 class Navigation {
@@ -356,9 +276,4 @@ class Status {
         code: json["CODE"],
         message: json["MESSAGE"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "CODE": code,
-        "MESSAGE": message,
-      };
 }

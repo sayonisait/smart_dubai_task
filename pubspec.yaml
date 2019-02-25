@@ -21,6 +21,7 @@ dependencies:
   http: ^0.12.0 #network lib
   cupertino_icons: ^0.1.2
   page_indicator: ^0.1.3 #pageview dot indicator
+  carousel_pro: ^0.0.13
 
 dev_dependencies:
   flutter_test:
@@ -31,4 +32,5 @@ flutter:
   assets:
     - assets/local/localization_ar.json
     - assets/local/localization_en.json
-    
+    - images/awokPlaceholder.png
+    - images/citywalk.jpg

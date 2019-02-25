@@ -148,7 +148,7 @@ class CounterBloc extends BlocBase {
 
   getCartCount() {
     homeRequest.getHomeProdutc().then((onValue) {
-      _cartModel = CartDT.cartFromJson(onValue);
+      _cartModel = CartModel.fromJson(onValue);
       updateCart.add(_cartModel);
     }).catchError((onError) {
       updateCart.addError(onError);
