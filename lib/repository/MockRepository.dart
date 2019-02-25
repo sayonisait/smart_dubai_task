@@ -5,7 +5,6 @@ import 'package:awok_starter/entities/AddToCart.dart';
 import 'package:awok_starter/entities/CategoryModal.dart';
 import 'package:awok_starter/entities/FlashProducts.dart';
 import 'package:awok_starter/entities/Offer.dart';
-import 'package:awok_starter/entities/ProductDetail.dart';
 import 'package:awok_starter/entities/Products.dart';
 import 'package:awok_starter/repository/BaseRepository.dart';
 import 'package:awok_starter/ui/CounterWidget.dart';
