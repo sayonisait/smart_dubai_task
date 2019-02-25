@@ -1,11 +1,13 @@
 import 'package:awok_starter/bloc/NativeBlockProvider.dart';
 import 'package:awok_starter/bloc/NewHomeBloc.dart';
+import 'package:awok_starter/bloc/ProductDetailsBloc.dart';
 import 'package:awok_starter/entities/AddToCart.dart';
 import 'package:awok_starter/entities/CategoryModal.dart';
 import 'package:awok_starter/entities/FlashProducts.dart';
 import 'package:awok_starter/entities/Offer.dart';
 import 'package:awok_starter/entities/Products.dart';
 import 'package:awok_starter/ui/pages/BaseStatelessPage.dart';
+import 'package:awok_starter/ui/pages/ProductDetailsPage.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 
@@ -383,7 +385,7 @@ class Dashboard extends BaseStatelessPage {
   Widget getVerticalProducts(HomeData data) {
     return Column(
       children: <Widget>[
-        Container(
+        Container(color: Colors.red,
           height: 30.0,
           child: Text(
             'Online Shopping Festival',
@@ -403,7 +405,7 @@ class Dashboard extends BaseStatelessPage {
           primary: false,
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
-            return Card(
+            return  GestureDetector(child:   Card(
               elevation: 5.0,
               child: new Column(
                 children: <Widget>[
@@ -462,10 +464,21 @@ class Dashboard extends BaseStatelessPage {
                   ),
                 ],
               ),
-            );
+            ),onTap:()=>goToProductDetailPage(context));
           },
         ),
       ],
+    );
+  }
+
+  goToProductDetailPage(BuildContext context){
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => BlocProvider<ProductDetaisBloc>(
+      bloc: ProductDetaisBloc(),
+      child: ProductDetailsPage("Product Details"),
+    ),
+    ),
     );
   }
 
