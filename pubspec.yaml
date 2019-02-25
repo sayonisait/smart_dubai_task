@@ -20,6 +20,7 @@ dependencies:
   #App 3rd Parties  
   http: ^0.12.0 #network lib
   cupertino_icons: ^0.1.2
+  page_indicator: ^0.1.3 #pageview dot indicator
 
 dev_dependencies:
   flutter_test:

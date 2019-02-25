@@ -1,5 +1,3 @@
-
-
 const String TOKEN = "";
 const String KEY = "";
 
@@ -15,11 +13,12 @@ class ApiResources {
   static const String home = "";
   static const String product = "/v2/products/";
   static const String productVariants = "/v2/products/variants";
-  
+  static const String images =
+      "/images/?sizes=custom,original,large&size_custom=64x64";
+
   static const String flash = "";
   static const String cart = "/v2/cart/";
-   static const String yyyy = "/v2/cart/?param1=valu1&param2=valu2";
-
+  static const String yyyy = "/v2/cart/?param1=valu1&param2=valu2";
 }
 
 //APi Headers
@@ -31,7 +30,13 @@ class Headers {
 class APIs {
   String get apiHome => _getEndPointURL(Country.AE) + ApiResources.home;
   String get apiCart => _getEndPointURL(Country.AE) + ApiResources.cart;
-  String  apiProductDetail(String productId) => _getEndPointURL(Country.AE) + ApiResources.product+productId;
+  String apiProductDetail(String productId) =>
+      _getEndPointURL(Country.AE) + ApiResources.product + productId;
+  String apiProductImages(String productId) =>
+      _getEndPointURL(Country.AE) +
+      ApiResources.product +
+      productId +
+      ApiResources.images;
 
   String _getEndPointURL(Country country) {
     String uri;

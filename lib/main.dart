@@ -17,7 +17,8 @@ class AwokApp extends StatelessWidget {
     return MaterialApp(
       title: 'Awok - Flutter',
       theme: ThemeData(
-        primarySwatch: Colors.amber,
+        primarySwatch: Colors.lightBlue,
+        accentColor: Colors.blueAccent
       ),
       home: BlocProvider<ProductDetaisBloc>(
         bloc: ProductDetaisBloc(),

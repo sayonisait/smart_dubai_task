@@ -17,6 +17,7 @@ class ApiManager {
 
   Future<dynamic> makeRequest(HttpMethods method, String uri, Map params) async {
     http.Response response;
+    print("url:" +uri);
     switch (method) {
       case HttpMethods.GET:
         response = await http.get(uri, headers: getHeader());

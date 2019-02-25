@@ -4,32 +4,37 @@
 
 import 'dart:convert';
 
-ProductDetail productDetailFromJson(String str) {
+Product productDetailFromJson(String str) {
     final jsonData = json.decode(str);
-    return ProductDetail.fromJson(jsonData);
+    return Product.fromJson(jsonData);
 }
 
-String productDetailToJson(ProductDetail data) {
+String productDetailToJson(Product data) {
     final dyn = data.toJson();
     return json.encode(dyn);
 }
 
-class ProductDetail {
+class Product {
+
     Api api;
     Status status;
     Output output;
 
-    ProductDetail({
+    Product({
         this.api,
         this.status,
         this.output,
     });
 
-    factory ProductDetail.fromJson(Map<String, dynamic> json) => new ProductDetail(
+    factory Product.fromJson(Map<String, dynamic> json) {
+            Status status = Status.fromJson(json["STATUS"]);
+
+      
+      return new Product(
         api: Api.fromJson(json["API"]),
-        status: Status.fromJson(json["STATUS"]),
-        output: Output.fromJson(json["OUTPUT"]),
-    );
+        status: status,
+      output: status.code == 200 ? Output.fromJson(json["OUTPUT"]) : null,
+    );}
 
     Map<String, dynamic> toJson() => {
         "API": api.toJson(),
@@ -131,13 +136,13 @@ class Data {
     String name;
     Store store;
     Prices prices;
-    Cart warranty;
-    Cart condition;
-    List<Cart> tags;
+    Tag warranty;
+    Tag condition;
+    List<Tag> tags;
     List<Variant> variants;
-    Cart share;
-    Cart cart;
-    List<Cart> attributes;
+    Tag share;
+    Tag cart;
+    List<Tag> attributes;
 
     Data({
         this.id,
@@ -156,15 +161,15 @@ class Data {
     factory Data.fromJson(Map<String, dynamic> json) => new Data(
         id: json["ID"],
         name: json["NAME"],
-        store: Store.fromJson(json["STORE"]),
-        prices: Prices.fromJson(json["PRICES"]),
-        warranty: Cart.fromJson(json["WARRANTY"]),
-        condition: Cart.fromJson(json["CONDITION"]),
-        tags: new List<Cart>.from(json["TAGS"].map((x) => Cart.fromJson(x))),
-        variants: new List<Variant>.from(json["VARIANTS"].map((x) => Variant.fromJson(x))),
-        share: Cart.fromJson(json["SHARE"]),
-        cart: Cart.fromJson(json["CART"]),
-        attributes: new List<Cart>.from(json["ATTRIBUTES"].map((x) => Cart.fromJson(x))),
+        store:json.keys.contains("STORE")?  Store.fromJson(json["STORE"]):null,
+        prices: json.keys.contains("PRICES")? Prices.fromJson(json["PRICES"]):null,
+        warranty:json.keys.contains("WARRANTY")? Tag.fromJson(json["WARRANTY"]):null,
+        condition:json.keys.contains("CONDITION")? Tag.fromJson(json["CONDITION"]):null,
+        tags:json.keys.contains("TAGS")? new List<Tag>.from(json["TAGS"].map((x) => Tag.fromJson(x))):null,
+        variants: json.keys.contains("VARIANTS")? new List<Variant>.from(json["VARIANTS"].map((x) => Variant.fromJson(x))):null,
+        share:json.keys.contains("SHARE")?  Tag.fromJson(json["SHARE"]):null,
+        cart:json.keys.contains("CART")?  Tag.fromJson(json["CART"]):null,
+        attributes:json.keys.contains("ATTRIBUTES")?  new List<Tag>.from(json["ATTRIBUTES"].map((x) => Tag.fromJson(x))):null,
     );
 
     Map<String, dynamic> toJson() => {
@@ -174,7 +179,7 @@ class Data {
         "PRICES": prices.toJson(),
         "WARRANTY": warranty.toJson(),
         "CONDITION": condition.toJson(),
-        "TAGS": new List<dynamic>.from(tags.map((x) => x.toJson())),
+        "TAGS":  new List<dynamic>.from(tags.map((x) => x.toJson())),
         "VARIANTS": new List<dynamic>.from(variants.map((x) => x.toJson())),
         "SHARE": share.toJson(),
         "CART": cart.toJson(),
@@ -182,16 +187,16 @@ class Data {
     };
 }
 
-class Cart {
+class Tag {
     String title;
     String value;
 
-    Cart({
+    Tag({
         this.title,
         this.value,
     });
 
-    factory Cart.fromJson(Map<String, dynamic> json) => new Cart(
+    factory Tag.fromJson(Map<String, dynamic> json) => new Tag(
         title: json["TITLE"],
         value: json["VALUE"] == null ? null : json["VALUE"],
     );
@@ -203,8 +208,8 @@ class Cart {
 }
 
 class Prices {
-    int current;
-    int msrp;
+    String current;
+    String msrp;
     String currency;
 
     Prices({
@@ -214,8 +219,8 @@ class Prices {
     });
 
     factory Prices.fromJson(Map<String, dynamic> json) => new Prices(
-        current: json["CURRENT"],
-        msrp: json["MSRP"],
+        current:json["CURRENT"].toString(),
+        msrp:  json["MSRP"].toString(),
         currency: json["CURRENCY"],
     );
 
@@ -252,7 +257,7 @@ class Store {
 
 class Variant {
     String title;
-    List<Item> items;
+    List<VariantItem> items;
 
     Variant({
         this.title,
@@ -261,7 +266,7 @@ class Variant {
 
     factory Variant.fromJson(Map<String, dynamic> json) => new Variant(
         title: json["TITLE"],
-        items: new List<Item>.from(json["ITEMS"].map((x) => Item.fromJson(x))),
+        items: new List<VariantItem>.from(json["ITEMS"].map((x) => VariantItem.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
@@ -270,16 +275,16 @@ class Variant {
     };
 }
 
-class Item {
+class VariantItem {
     String productId;
     String title;
 
-    Item({
+    VariantItem({
         this.productId,
         this.title,
     });
 
-    factory Item.fromJson(Map<String, dynamic> json) => new Item(
+    factory VariantItem.fromJson(Map<String, dynamic> json) => new VariantItem(
         productId: json["PRODUCT_ID"],
         title: json["TITLE"],
     );

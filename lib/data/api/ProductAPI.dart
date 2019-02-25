@@ -6,4 +6,8 @@ Future<dynamic> fetchProdutDetail(String productId) async {
   return  apiManager.makeRequest(
         HttpMethods.GET, APIs().apiProductDetail(productId), null);
   }
+Future<dynamic>    fetchProductImages(String productID) async{
+  return apiManager.makeRequest(HttpMethods.GET, APIs().apiProductImages(productID), null);
+}
+
 }
