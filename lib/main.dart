@@ -21,7 +21,7 @@ class AwokApp extends StatelessWidget {
         accentColor: Colors.blueAccent
       ),
       home: BlocProvider<ProductDetaisBloc>(
-        bloc: ProductDetaisBloc(),
+        bloc: ProductDetaisBloc("1258210"),
         child: ProductDetailsPage("Product Details"),
       ),
     );

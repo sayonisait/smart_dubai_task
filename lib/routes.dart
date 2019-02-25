@@ -1,0 +1,1 @@
+import 'package:awok_starter/ui/pages/ProductDetailsPage.dart';

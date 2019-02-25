@@ -11,12 +11,13 @@ class ProductDetaisBloc extends BlocBase {
   StreamController<ProductDetails> _streamController = StreamController();
   Sink<ProductDetails> get sink => _streamController.sink;
   Stream<ProductDetails> get stream => _streamController.stream;
-  String productID="1258210";
+  String productID;
   ProductDetails myProduct;
   
 
-  ProductDetaisBloc() {
+  ProductDetaisBloc(String id) {
     print("fetching");
+    productID=id;
 
     myProduct= new ProductDetails();
     myProduct.images=new List();

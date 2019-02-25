@@ -13,27 +13,29 @@ class ProductDetailsPage extends BaseStatelessPage {
   ProductDetaisBloc _bloc;
 
   getAddToCartSection() {
-     return FloatingActionButton(onPressed: (){},child: Icon(Icons.shopping_cart,),foregroundColor: Colors.white,);
+    return FloatingActionButton(
+      onPressed: () {},
+      child: Icon(
+        Icons.shopping_cart,
+      ),
+      foregroundColor: Colors.white,
+    );
   }
 
   Widget buildScafold() {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       body: buildBody(),
-      floatingActionButton:  getAddToCartSection(),
+      floatingActionButton: getAddToCartSection(),
     );
   }
 
   Widget buildBody() {
     return Stack(children: <Widget>[
       SingleChildScrollView(
-              child: 
-               getDetailSection(),
-              
-            ),
-        
+        child: getDetailSection(),
+      ),
       buildAppBar(),
-      
     ]);
   }
 
@@ -53,27 +55,39 @@ class ProductDetailsPage extends BaseStatelessPage {
       stream: _bloc.stream,
       initialData: null,
       builder: (BuildContext context, AsyncSnapshot<ProductDetails> snapshot) {
-        if(snapshot.hasError) {print(snapshot.error);}
-      
-        if (snapshot.hasData){ 
-          print(snapshot.data.product==null? "No product":"Product exists");
-                    print(snapshot.data.images==null? "No images":"images exists");
+        if (snapshot.hasError) {
+          print(snapshot.error);
+        }
 
-          return getDetailBody(snapshot.data, context );}
-          print("No data");
-       return Center(child: CircularProgressIndicator());
+        if (snapshot.hasData) {
+          print(
+              snapshot.data.product == null ? "No product" : "Product exists");
+          print(snapshot.data.images == null ? "No images" : "images exists");
+
+          return getDetailBody(snapshot.data, context);
+        }
+        print("No data");
+        return Center(child: CircularProgressIndicator());
       },
     );
   }
 
   getDetailBody(ProductDetails details, BuildContext context) {
-    return  Padding(padding: EdgeInsets.only(bottom: 80),child: Column(
-      children: <Widget>[
-        getPictureSection(details.images,context),
-        details.product!=null&& details.product.output!=null ? getFirstCard(details.product.output.data):Container(),
-        details.product!=null&& details.product.output!=null&&details.product.output.data!=null ? getSecondCard(details.product.output.data.attributes):Container(),
-      ],
-    ));
+    return Padding(
+        padding: EdgeInsets.only(bottom: 80),
+        child: Column(
+          children: <Widget>[
+            getPictureSection(details.images, context),
+            details.product != null && details.product.output != null
+                ? getFirstCard(details.product.output.data)
+                : Container(),
+            details.product != null &&
+                    details.product.output != null &&
+                    details.product.output.data != null
+                ? getSecondCard(details.product.output.data.attributes)
+                : Container(),
+          ],
+        ));
   }
 
   getStoreInfoText(Store store) {
@@ -102,15 +116,15 @@ class ProductDetailsPage extends BaseStatelessPage {
   }
 
   getVariantSection(List<Variant> variants, String productID) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-              margin: EdgeInsets.only(bottom: 10, top: 10),
-              child: Text(variants[0].title)),
-          getListOfVariants(variants[0].items, productID),
-        ],
-      );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Container(
+            margin: EdgeInsets.only(bottom: 10, top: 10),
+            child: Text(variants[0].title)),
+        getListOfVariants(variants[0].items, productID),
+      ],
+    );
   }
 
   Widget getListOfVariants(List<VariantItem> items, String productID) {
@@ -140,13 +154,25 @@ class ProductDetailsPage extends BaseStatelessPage {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                getNameText(data!=null && data.name !=null? data.name:""),
-               data!=null && data.name !=null? getPriceSection(data.prices):Container(height: 10,),
-               data!=null && data.tags!=null? getTagSection(data.tags):new Container(height:10),
+                getNameText(data != null && data.name != null ? data.name : ""),
+                data != null && data.name != null
+                    ? getPriceSection(data.prices)
+                    : Container(
+                        height: 10,
+                      ),
+                data != null && data.tags != null
+                    ? getTagSection(data.tags)
+                    : new Container(height: 10),
                 Divider(),
-               data!=null && data.store!=null? getStoreInfoText(data.store):Container(height: 10,),
+                data != null && data.store != null
+                    ? getStoreInfoText(data.store)
+                    : Container(
+                        height: 10,
+                      ),
                 Divider(),
-              data!=null &&  data.variants!=null ? getVariantSection(data.variants, data.id):Container(height:10),
+                data != null && data.variants != null
+                    ? getVariantSection(data.variants, data.id)
+                    : Container(height: 10),
               ],
             )));
   }
@@ -177,21 +203,24 @@ class ProductDetailsPage extends BaseStatelessPage {
   }
 
   getSpecificationsListView(List<Tag> attributes) {
-    if(attributes!=null&& attributes.length>0)
-    return ListView.builder(
-      padding: EdgeInsets.all(0),
-      shrinkWrap: true,
-      primary: false,
-      itemCount:attributes!=null? attributes.length:0,
-      
-      itemBuilder: (context, position) {
-        return 
-         ListTile(dense: true,
-           trailing:   Text(attributes[position].value),
-           leading: Text(attributes[position].title ,));
-      },
+    if (attributes != null && attributes.length > 0)
+      return ListView.builder(
+        padding: EdgeInsets.all(0),
+        shrinkWrap: true,
+        primary: false,
+        itemCount: attributes != null ? attributes.length : 0,
+        itemBuilder: (context, position) {
+          return ListTile(
+              dense: true,
+              trailing: Text(attributes[position].value),
+              leading: Text(
+                attributes[position].title,
+              ));
+        },
+      );
+    return Container(
+      height: 100,
     );
-     return Container(height: 100,);
   }
 
   getPriceSection(Prices prices) {
@@ -273,21 +302,20 @@ class ProductDetailsPage extends BaseStatelessPage {
   }
 
   Widget getPictureSection(List<Datum> pics, BuildContext context) {
-   print(pics.toString());
+    print(pics.toString());
     return AspectRatio(
         child: PageIndicatorContainer(
           align: IndicatorAlign.bottom,
-          length:pics.length,
+          length: pics.length,
           indicatorColor: Colors.white,
           indicatorSelectorColor: Theme.of(context).accentColor,
-          size:8,
+          size: 8,
           pageView: PageView(
             scrollDirection: Axis.horizontal,
             children: getImages(pics),
           ),
         ),
         aspectRatio: 1);
-        
   }
 
   List<Widget> getImages(List<Datum> pics) {
