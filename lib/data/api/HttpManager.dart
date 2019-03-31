@@ -13,7 +13,10 @@ class ApiManager {
     return {
       "Authorization":
           "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiOTg1ODYiLCJ0b2tlbiI6IjkxYzQ0Mjk4Nzg4MDRjNWIxOGFhYjE1M2FhYzU2ZTY1In0.Wo36u205EjqKN1myYb4St0oTC_PiJrLOPNuV6284HZQ",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "App-Version":"19050",
+      "Currency":"KWD",
+      "OS":"android",
     };
   }
 

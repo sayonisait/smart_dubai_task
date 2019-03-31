@@ -1,4 +1,5 @@
 import 'package:awok_starter/entities/Product.dart';
+import 'package:awok_starter/entities/ProductDelivery.dart';
 import 'package:awok_starter/entities/ProductImages.dart';
 import 'package:awok_starter/data/api/DashboardAPIManager.dart';
 import 'package:awok_starter/data/api/HomeApiProvider.dart';
@@ -40,12 +41,14 @@ class ApiRepository extends BaseRepository {
         .then((onValue) => CartModel.fromJson(onValue));
   }
 @override
-  Future<Products> getProducts(String page) async {
+  Future<Products> getProducts(int pageNumber) async {
     //todo change here
     return DashboardApiManager()
-        .getHomeAPI(page)
+        .getHomeAPI(pageNumber)
         .then((onValue) => Products.fromJson(onValue));
   }
+
+  
 
 @override
   Future<FlashProducts> getFlashProducts() async {
@@ -74,5 +77,12 @@ class ApiRepository extends BaseRepository {
     return HomeApiProvider()
         .getCategoryAPI()
         .then((onValue) => Category.fromJson(onValue));
+  }
+
+  @override
+  Future<Delivery> getDeliveryInfo(String productID) {
+   return ProductAPI().fetchDeliveryInfo(productID).then((onValue)=>
+
+     Delivery.fromJson(onValue));
   }
 }

@@ -56,7 +56,6 @@ nextPage() {
 }
   @override
   void dispose() {
-    // TODO: implement dispose
     _offerStreamController.close();
     _flashStreamController.close();
     _categoryStreamController.close();
@@ -67,7 +66,7 @@ nextPage() {
 
   getProducts() async {
     BaseRepository base = Injector().getRepository;
-    base.getProducts('PAGED=1&IW=295&IH=295&PER_PAGE=20').then((onValue) {
+    base.getProducts(1).then((onValue) {
       print(onValue.toString());
       updateProduct.add(onValue);
     }).catchError((onError) {

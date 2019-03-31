@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:awok_starter/entities/Item.dart';
+
 Products productsFromJson(String str) {
     final jsonData = json.decode(str);
     return Products.fromJson(jsonData);
@@ -174,89 +176,89 @@ class Banner {
     };
 }
 
-class Item {
-    String id;
-    String linkedProdId;
-    String linkedProdCode;
-    String linkedSectionCode;
-    String name;
-    String sort;
-    String imageFile;
-    String activeFrom;
-    String activeFromFormatted;
-    String activeTo;
-    String dateDifference;
-    Ild preOrder;
-    ImageSource image;
-    Prices prices;
-    CartData cartData;
-    String productLink;
-    Cart cart;
-    String videoId;
+// class Item {
+//     String id;
+//     String linkedProdId;
+//     String linkedProdCode;
+//     String linkedSectionCode;
+//     String name;
+//     String sort;
+//     String imageFile;
+//     String activeFrom;
+//     String activeFromFormatted;
+//     String activeTo;
+//     String dateDifference;
+//     Ild preOrder;
+//     ImageSource image;
+//     Prices prices;
+//     CartData cartData;
+//     String productLink;
+//     Cart cart;
+//     String videoId;
 
-    Item({
-        this.id,
-        this.linkedProdId,
-        this.linkedProdCode,
-        this.linkedSectionCode,
-        this.name,
-        this.sort,
-        this.imageFile,
-        this.activeFrom,
-        this.activeFromFormatted,
-        this.activeTo,
-        this.dateDifference,
-        this.preOrder,
-        this.image,
-        this.prices,
-        this.cartData,
-        this.productLink,
-        this.cart,
-        this.videoId,
-    });
+//     Item({
+//         this.id,
+//         this.linkedProdId,
+//         this.linkedProdCode,
+//         this.linkedSectionCode,
+//         this.name,
+//         this.sort,
+//         this.imageFile,
+//         this.activeFrom,
+//         this.activeFromFormatted,
+//         this.activeTo,
+//         this.dateDifference,
+//         this.preOrder,
+//         this.image,
+//         this.prices,
+//         this.cartData,
+//         this.productLink,
+//         this.cart,
+//         this.videoId,
+//     });
 
-    factory Item.fromJson(Map<String, dynamic> json) => new Item(
-        id: json["ID"],
-        linkedProdId: json["LINKED_PROD_ID"],
-        linkedProdCode: json["LINKED_PROD_CODE"],
-        linkedSectionCode: json["LINKED_SECTION_CODE"],
-        name: json["NAME"],
-        sort: json["SORT"],
-        imageFile: json["IMAGE_FILE"],
-        activeFrom: json["ACTIVE_FROM"],
-        activeFromFormatted: json["ACTIVE_FROM_FORMATTED"],
-        activeTo: json["ACTIVE_TO"],
-        dateDifference: json["DATE_DIFFERENCE"],
-        preOrder: ildValues.map[json["PRE_ORDER"]],
-        image: ImageSource.fromJson(json["IMAGE"]),
-        prices: Prices.fromJson(json["PRICES"]),
-        cartData: CartData.fromJson(json["CART_DATA"]),
-        productLink: json["PRODUCT_LINK"],
-        cart: Cart.fromJson(json["CART"]),
-        videoId: json["VIDEO_ID"] == null ? null : json["VIDEO_ID"],
-    );
+//     factory Item.fromJson(Map<String, dynamic> json) => new Item(
+//         id: json["ID"],
+//         linkedProdId: json["LINKED_PROD_ID"],
+//         linkedProdCode: json["LINKED_PROD_CODE"],
+//         linkedSectionCode: json["LINKED_SECTION_CODE"],
+//         name: json["NAME"],
+//         sort: json["SORT"],
+//         imageFile: json["IMAGE_FILE"],
+//         activeFrom: json["ACTIVE_FROM"],
+//         activeFromFormatted: json["ACTIVE_FROM_FORMATTED"],
+//         activeTo: json["ACTIVE_TO"],
+//         dateDifference: json["DATE_DIFFERENCE"],
+//         preOrder: ildValues.map[json["PRE_ORDER"]],
+//         image: ImageSource.fromJson(json["IMAGE"]),
+//         prices: Prices.fromJson(json["PRICES"]),
+//         cartData: CartData.fromJson(json["CART_DATA"]),
+//         productLink: json["PRODUCT_LINK"],
+//         cart: Cart.fromJson(json["CART"]),
+//         videoId: json["VIDEO_ID"] == null ? null : json["VIDEO_ID"],
+//     );
 
-    Map<String, dynamic> toJson() => {
-        "ID": id,
-        "LINKED_PROD_ID": linkedProdId,
-        "LINKED_PROD_CODE": linkedProdCode,
-        "LINKED_SECTION_CODE": linkedSectionCode,
-        "NAME": name,
-        "SORT": sort,
-        "IMAGE_FILE": imageFile,
-        "ACTIVE_FROM": activeFrom,
-        "ACTIVE_FROM_FORMATTED": activeFromFormatted,
-        "ACTIVE_TO": activeTo,
-        "DATE_DIFFERENCE": dateDifference,
-        "PRE_ORDER": ildValues.reverse[preOrder],
-        "IMAGE": image.toJson(),
-        "PRICES": prices.toJson(),
-        "CART_DATA": cartData.toJson(),
-        "PRODUCT_LINK": productLink,
-        "CART": cart.toJson(),
-        "VIDEO_ID": videoId == null ? null : videoId,
-    };
-}
+//     Map<String, dynamic> toJson() => {
+//         "ID": id,
+//         "LINKED_PROD_ID": linkedProdId,
+//         "LINKED_PROD_CODE": linkedProdCode,
+//         "LINKED_SECTION_CODE": linkedSectionCode,
+//         "NAME": name,
+//         "SORT": sort,
+//         "IMAGE_FILE": imageFile,
+//         "ACTIVE_FROM": activeFrom,
+//         "ACTIVE_FROM_FORMATTED": activeFromFormatted,
+//         "ACTIVE_TO": activeTo,
+//         "DATE_DIFFERENCE": dateDifference,
+//         "PRE_ORDER": ildValues.reverse[preOrder],
+//         "IMAGE": image.toJson(),
+//         "PRICES": prices.toJson(),
+//         "CART_DATA": cartData.toJson(),
+//         "PRODUCT_LINK": productLink,
+//         "CART": cart.toJson(),
+//         "VIDEO_ID": videoId == null ? null : videoId,
+//     };
+// }
 
 class Cart {
     String title;
@@ -344,10 +346,10 @@ class Prices {
     });
 
     factory Prices.fromJson(Map<String, dynamic> json) => new Prices(
-        priceNew: json["PRICE_NEW"],
-        priceOld: json["PRICE_OLD"],
-        discount: json["DISCOUNT"],
-        percent: json["PERCENT"],
+        priceNew: json["PRICE_NEW"].toString(),
+        priceOld: json["PRICE_OLD"].toString(),
+        discount: json["DISCOUNT"].toString(),
+        percent: json["PERCENT"].toString(),
     );
 
     Map<String, dynamic> toJson() => {

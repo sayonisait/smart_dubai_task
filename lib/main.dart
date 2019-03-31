@@ -1,14 +1,9 @@
 
-import 'package:awok_starter/bloc/CartBloc.dart';
-import 'package:awok_starter/bloc/DashboardBloc.dart';
-import 'package:awok_starter/bloc/HomeBloc.dart';
+import 'package:awok_starter/bloc/HomePageOldBloc.dart';
 import 'package:awok_starter/bloc/NativeBlockProvider.dart';
 import 'package:awok_starter/di/DependencyInjection.dart';
-import 'package:awok_starter/ui/CounterWidget.dart';
-import 'package:awok_starter/ui/pages/AccountPage.dart';
-import 'package:awok_starter/ui/pages/HomePage.dart';
-import 'package:awok_starter/ui/styles/awoktheme.dart';
 import 'package:flutter/material.dart';
+import 'package:awok_starter/ui/pages/HomePageOld.dart';
 
 void main() {
     Injector.configure(Flavor.Network);
@@ -22,12 +17,13 @@ class AwokApp extends StatelessWidget {
     return MaterialApp(
       title: 'Awok - Flutter',
       theme: ThemeData(
-        primarySwatch: Colors.lightBlue,
-        accentColor: Colors.blueAccent
+        primarySwatch: Colors.blue,
+        accentColor: Colors.blueAccent,
+        canvasColor:Colors.transparent.withAlpha(5),
       ),
-      home: BlocProvider<HomeBloc>(
-        bloc: HomeBloc(),
-        child: HomePage(),
+      home: BlocProvider<HomePageOldBloc>(
+        bloc: HomePageOldBloc(),
+        child: HomePageRoute(),
       ),
     );
   }

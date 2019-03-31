@@ -1,6 +1,7 @@
 
 
 import 'package:awok_starter/entities/Product.dart';
+import 'package:awok_starter/entities/ProductDelivery.dart';
 import 'package:awok_starter/entities/ProductImages.dart';
 import 'package:awok_starter/entities/AddToCart.dart';
 import 'package:awok_starter/entities/CategoryModal.dart';
@@ -15,11 +16,12 @@ abstract class BaseRepository {
   Future<User> getData();
   Future<ProductImages> getProductImages(String productID);
   Future<CartModel> getCartData();
-  Future<Products> getProducts(String page);
+  Future<Products> getProducts(int page);
   Future<FlashProducts> getFlashProducts();
   Future<AddToCart> postAddToCart(String hash);
   Future<Offer> getOffer();
   Future<Category> getCategories();
+  Future<Delivery> getDeliveryInfo(String productID);
 
 
 

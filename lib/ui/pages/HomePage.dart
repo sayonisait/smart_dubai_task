@@ -27,7 +27,7 @@ class HomePage extends BaseStatelessPage {
   HomePage() {
     _pageController = PageController();
   }
-
+ 
   Widget buildScafold() {
     return Scaffold(
       backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),

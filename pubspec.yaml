@@ -22,6 +22,8 @@ dependencies:
   cupertino_icons: ^0.1.2
   page_indicator: ^0.1.3 #pageview dot indicator
   carousel_pro: ^0.0.13
+  html: any
+  flutter_html: ^0.9.4
 
 dev_dependencies:
   flutter_test:

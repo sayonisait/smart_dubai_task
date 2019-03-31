@@ -1,5 +1,6 @@
 
 import 'package:awok_starter/entities/Product.dart';
+import 'package:awok_starter/entities/ProductDelivery.dart';
 import 'package:awok_starter/entities/ProductImages.dart';
 import 'package:awok_starter/entities/AddToCart.dart';
 import 'package:awok_starter/entities/CategoryModal.dart';
@@ -23,13 +24,14 @@ class MockRepository extends BaseRepository {
   Future<ProductImages> getProductImages(String productID) {
     return null;
   }
-   @override
+
+  @override
   Future<CartModel> getCartData() {
-    return null;
+    return null; 
   }
 
   @override
-  Future<Products> getProducts(String page) {
+  Future<Products> getProducts(int page) {
     return null;
   }
   @override
@@ -46,6 +48,11 @@ class MockRepository extends BaseRepository {
   }
   @override
   Future<Category> getCategories() {
+    return null;
+  }
+
+  @override
+  Future<Delivery> getDeliveryInfo(String productID) {
     return null;
   }
 

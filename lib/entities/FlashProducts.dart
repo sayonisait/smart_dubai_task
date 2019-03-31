@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:awok_starter/entities/Item.dart';
+
 FlashProducts flashProductsFromJson(String str) {
     final jsonData = json.decode(str);
     return FlashProducts.fromJson(jsonData);
@@ -142,93 +144,7 @@ class FlashData {
     };
 }
 
-class Item {
-    String id;
-    String linkedProdId;
-    LinkedSectionCode linkedSectionCode;
-    String name;
-    String sort;
-    String imageFile;
-    String activeFrom;
-    String activeTo;
-    PreOrder preOrder;
-    ImageSource image;
-    Prices prices;
-    CartData cartData;
-    String productLink;
-    State state;
-    Timer timer;
-    PreOrder webSale;
-    Cart cart;
-    String videoId;
-    String popup;
 
-    Item({
-        this.id,
-        this.linkedProdId,
-        this.linkedSectionCode,
-        this.name,
-        this.sort,
-        this.imageFile,
-        this.activeFrom,
-        this.activeTo,
-        this.preOrder,
-        this.image,
-        this.prices,
-        this.cartData,
-        this.productLink,
-        this.state,
-        this.timer,
-        this.webSale,
-        this.cart,
-        this.videoId,
-        this.popup,
-    });
-
-    factory Item.fromJson(Map<String, dynamic> json) => new Item(
-        id: json["ID"],
-        linkedProdId: json["LINKED_PROD_ID"],
-        linkedSectionCode: linkedSectionCodeValues.map[json["LINKED_SECTION_CODE"]],
-        name: json["NAME"],
-        sort: json["SORT"],
-        imageFile: json["IMAGE_FILE"],
-        activeFrom: json["ACTIVE_FROM"],
-        activeTo: json["ACTIVE_TO"],
-        preOrder: preOrderValues.map[json["PRE_ORDER"]],
-        image: ImageSource.fromJson(json["IMAGE"]),
-        prices: Prices.fromJson(json["PRICES"]),
-        cartData: CartData.fromJson(json["CART_DATA"]),
-        productLink: json["PRODUCT_LINK"],
-        state: stateValues.map[json["STATE"]],
-        timer: json["TIMER"] == null ? null : Timer.fromJson(json["TIMER"]),
-        webSale: preOrderValues.map[json["WEB_SALE"]],
-        cart: Cart.fromJson(json["CART"]),
-        videoId: json["VIDEO_ID"] == null ? null : json["VIDEO_ID"],
-        popup: json["POPUP"] == null ? null : json["POPUP"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "ID": id,
-        "LINKED_PROD_ID": linkedProdId,
-        "LINKED_SECTION_CODE": linkedSectionCodeValues.reverse[linkedSectionCode],
-        "NAME": name,
-        "SORT": sort,
-        "IMAGE_FILE": imageFile,
-        "ACTIVE_FROM": activeFrom,
-        "ACTIVE_TO": activeTo,
-        "PRE_ORDER": preOrderValues.reverse[preOrder],
-        "IMAGE": image.toJson(),
-        "PRICES": prices.toJson(),
-        "CART_DATA": cartData.toJson(),
-        "PRODUCT_LINK": productLink,
-        "STATE": stateValues.reverse[state],
-        "TIMER": timer == null ? null : timer.toJson(),
-        "WEB_SALE": preOrderValues.reverse[webSale],
-        "CART": cart.toJson(),
-        "VIDEO_ID": videoId == null ? null : videoId,
-        "POPUP": popup == null ? null : popup,
-    };
-}
 
 class Cart {
     Title title;

@@ -37,7 +37,6 @@ class DashboardBloc extends BlocBase {
 
   @override
   void dispose() {
-    // TODO: implement dispose
      _flashStreamController.close();
     _productStreamController.close();
     _addToCartStreamController.close();
@@ -45,7 +44,8 @@ class DashboardBloc extends BlocBase {
 
   getProducts() async {
     BaseRepository base = Injector().getRepository;
-    base.getProducts('PAGED=1&IW=295&IH=295&PER_PAGE=20').then((onValue) {
+    
+    base.getProducts(1).then((onValue) {// changed by sayoni for testing
       print(onValue.toString());
       updateProduct.add(onValue);
     }).catchError((onError) {

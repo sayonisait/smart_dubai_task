@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:awok_starter/entities/Tag.dart';
+
 Product productDetailFromJson(String str) {
     final jsonData = json.decode(str);
     return Product.fromJson(jsonData);
@@ -112,7 +114,7 @@ class Uri {
 }
 
 class Output {
-    Data data;
+    ProductData data;
     Navigation navigation;
 
     Output({
@@ -121,7 +123,7 @@ class Output {
     });
 
     factory Output.fromJson(Map<String, dynamic> json) => new Output(
-        data: Data.fromJson(json["DATA"]),
+        data: ProductData.fromJson(json["DATA"]),
         navigation: Navigation.fromJson(json["NAVIGATION"]),
     );
 
@@ -131,7 +133,8 @@ class Output {
     };
 }
 
-class Data {
+class ProductData {
+  
     String id;
     String name;
     Store store;
@@ -144,7 +147,7 @@ class Data {
     Tag cart;
     List<Tag> attributes;
 
-    Data({
+    ProductData({
         this.id,
         this.name,
         this.store,
@@ -158,7 +161,7 @@ class Data {
         this.attributes,
     });
 
-    factory Data.fromJson(Map<String, dynamic> json) => new Data(
+    factory ProductData.fromJson(Map<String, dynamic> json) => new ProductData(
         id: json["ID"],
         name: json["NAME"],
         store:json.keys.contains("STORE")?  Store.fromJson(json["STORE"]):null,
@@ -187,25 +190,7 @@ class Data {
     };
 }
 
-class Tag {
-    String title;
-    String value;
 
-    Tag({
-        this.title,
-        this.value,
-    });
-
-    factory Tag.fromJson(Map<String, dynamic> json) => new Tag(
-        title: json["TITLE"],
-        value: json["VALUE"] == null ? null : json["VALUE"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "TITLE": title,
-        "VALUE": value == null ? null : value,
-    };
-}
 
 class Prices {
     String current;

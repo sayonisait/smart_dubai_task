@@ -15,6 +15,7 @@ class ApiResources {
   static const String productVariants = "/v2/products/variants";
   static const String images =
       "/images/?sizes=custom,original,large&size_custom=64x64";
+  static const String delivery = "/delivery/";
 
 
   static const String flash = "/flash/";
@@ -34,11 +35,14 @@ class Headers {
 
 //Products Apis
 class APIs {
-  String get apiHome => _getEndPointURL(Country.AE) + ApiResources.home;
   String get apiFlash => _getEndPointURL(Country.AE) + ApiResources.flash;
   String get apiCart => _getEndPointURL(Country.AE) + ApiResources.cart;
+
+  String apiHome(int pageNumber, int pageSize)=> _getEndPointURL(Country.AE) + ApiResources.home+"PAGED=$pageNumber&PER_PAGE=$pageSize";
   String apiProductDetail(String productId) =>
       _getEndPointURL(Country.AE) + ApiResources.product + productId;
+      String apiDeliveryInfo(String productId) =>
+      _getEndPointURL(Country.AE) + ApiResources.product + productId+ApiResources.delivery;
   String apiProductImages(String productId) =>
       _getEndPointURL(Country.AE) +
       ApiResources.product +

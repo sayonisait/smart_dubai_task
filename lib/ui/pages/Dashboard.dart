@@ -10,7 +10,6 @@ import 'package:awok_starter/ui/pages/BaseStatelessPage.dart';
 import 'package:awok_starter/ui/pages/ProductDetailsPage.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
-
 class Dashboard extends BaseStatelessPage {
   // NewHomeBloc bloc;
   // NewHomeBloc bloc = NewHomeBloc();
@@ -218,7 +217,6 @@ class Dashboard extends BaseStatelessPage {
                               fontSize: 14.0,
                               color: Colors.black)),
                     ),
-                    
                   ],
                 );
               },
@@ -385,7 +383,8 @@ class Dashboard extends BaseStatelessPage {
   Widget getVerticalProducts(HomeData data) {
     return Column(
       children: <Widget>[
-        Container(color: Colors.red,
+        Container(
+          color: Colors.red,
           height: 30.0,
           child: Text(
             'Online Shopping Festival',
@@ -405,81 +404,85 @@ class Dashboard extends BaseStatelessPage {
           primary: false,
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
-            return  GestureDetector(child:   Card(
-              elevation: 5.0,
-              child: new Column(
-                children: <Widget>[
-                  FadeInImage.assetNetwork(
-                    placeholder: 'images/awokPlaceholder.png',
-                    image: data.items[index].image.src,
-                    //result.output.data.items[index].image.src,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(
-                        left: 5.0, right: 5.0, bottom: 5.0),
-                    child: Text(
-                      data.items[index].name,
-                      maxLines: 2,
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            return GestureDetector(
+                child: Card(
+                  elevation: 5.0,
+                  child: new Column(
                     children: <Widget>[
-                      new Text(data.items[index].prices.priceNew + 'AED'),
-                      new Text(
-                        data.items[index].prices.priceOld + 'AED',
-                        style: TextStyle(
-                          color: Colors.grey,
-                          decoration: TextDecoration.lineThrough,
+                      FadeInImage.assetNetwork(
+                        placeholder: 'images/awokPlaceholder.png',
+                        image: data.items[index].image.src,
+                        //result.output.data.items[index].image.src,
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(
+                            left: 5.0, right: 5.0, bottom: 5.0),
+                        child: Text(
+                          data.items[index].name,
+                          maxLines: 2,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          new Text(data.items[index].prices.priceNew + 'AED'),
+                          new Text(
+                            data.items[index].prices.priceOld + 'AED',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              decoration: TextDecoration.lineThrough,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(left: 5.0, right: 5.0),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: RaisedButton(
+                            //Day.monday.toString().split('.')[1];
+                            child: Text(data.items[index].cart.title.toString(),
+                                style: TextStyle(
+                                    fontSize: 16.0, color: Colors.white)),
+                            color: Colors.orange,
+                            onPressed: () {
+                              NewHomeBloc().postAddToCart(
+                                  data.items[index].cart.value.toString());
+                              showBottomSheet<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return Container(
+                                        height: 100,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(32.0),
+                                          child: addToCart(),
+                                        ));
+                                  });
+                            },
+                          ),
                         ),
                       ),
                     ],
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(left: 5.0, right: 5.0),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: RaisedButton(
-                        //Day.monday.toString().split('.')[1];
-                        child: Text(data.items[index].cart.title.toString(),
-                            style:
-                                TextStyle(fontSize: 16.0, color: Colors.white)),
-                        color: Colors.orange,
-                        onPressed: () {
-                          NewHomeBloc().postAddToCart(
-                              data.items[index].cart.value.toString());
-                          showBottomSheet<void>(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Container(
-                                    height: 100,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(32.0),
-                                      child: addToCart(),
-                                    ));
-                              });
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),onTap:()=>goToProductDetailPage(context));
+                ),
+                onTap: () => goToProductDetailPage(
+                    context, data.items[index].linkedProdId));
           },
         ),
       ],
     );
   }
 
-  goToProductDetailPage(BuildContext context){
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => BlocProvider<ProductDetaisBloc>(
-      bloc: ProductDetaisBloc(),
-      child: ProductDetailsPage("Product Details"),
-    ),
-    ),
-    );
+  goToProductDetailPage(BuildContext context, String id) {
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => BlocProvider<ProductDetaisBloc>(
+    //           bloc: ProductDetaisBloc(id),
+    //           child: ProductDetailsPage("Product Details"),
+    //         ),
+    //   ),
+    // );
   }
 
   Widget getHorizontalProducts(FlashData data) {
@@ -493,52 +496,55 @@ class Dashboard extends BaseStatelessPage {
         primary: false,
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
-          return Card(
-            elevation: 5.0,
-            child: new Column(
-              children: <Widget>[
-                FadeInImage.assetNetwork(
-                  placeholder: 'images/awokPlaceholder.png',
-                  image: data.items[index].image.src,
-                  //result.output.data.items[index].image.src,
-                ),
-                Container(
-                  margin:
-                      const EdgeInsets.only(left: 5.0, right: 5.0, bottom: 5.0),
-                  child: Text(
-                    data.items[index].name,
-                    maxLines: 2,
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          return GestureDetector(
+              onTap: () => goToProductDetailPage(
+                  context, data.items[index].linkedProdId),
+              child: Card(
+                elevation: 5.0,
+                child: new Column(
                   children: <Widget>[
-                    new Text(data.items[index].prices.priceNew + 'AED'),
-                    new Text(
-                      data.items[index].prices.priceOld + 'AED',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        decoration: TextDecoration.lineThrough,
+                    FadeInImage.assetNetwork(
+                      placeholder: 'images/awokPlaceholder.png',
+                      image: data.items[index].image.src,
+                      //result.output.data.items[index].image.src,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(
+                          left: 5.0, right: 5.0, bottom: 5.0),
+                      child: Text(
+                        data.items[index].name,
+                        maxLines: 2,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        new Text(data.items[index].prices.priceNew + 'AED'),
+                        new Text(
+                          data.items[index].prices.priceOld + 'AED',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            decoration: TextDecoration.lineThrough,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(left: 5.0, right: 5.0),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: RaisedButton(
+                          child: Text('ADD TO CART ',
+                              style: TextStyle(
+                                  fontSize: 16.0, color: Colors.white)),
+                          color: Colors.orange,
+                          onPressed: () {},
+                        ),
                       ),
                     ),
                   ],
                 ),
-                Container(
-                  margin: const EdgeInsets.only(left: 5.0, right: 5.0),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: RaisedButton(
-                      child: Text('ADD TO CART ',
-                          style:
-                              TextStyle(fontSize: 16.0, color: Colors.white)),
-                      color: Colors.orange,
-                      onPressed: () {},
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
+              ));
         },
       ),
     );
