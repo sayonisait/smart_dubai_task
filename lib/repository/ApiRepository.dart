@@ -15,6 +15,7 @@ import 'package:awok_starter/data/api/CartApiProvider.dart';
 import 'package:awok_starter/entities/CartModel.dart';
 
 class ApiRepository extends BaseRepository {
+
   @override
   Future<User> getData() async => await UserNetwork().getNetworkUser();
 
@@ -29,17 +30,20 @@ class ApiRepository extends BaseRepository {
   Future<ProductImages> getProductImages(String productID) {
     return ProductAPI().fetchProductImages(productID).then((onValue){
 
-      print("Response:"+onValue.toString());
     return ProductImages.fromJson(onValue);
     });
   }
+
+
    @override
   Future<CartModel> getCartData() async {
     //todo change here
-    return Apiprovider()
+    return CartAPIProvider()
         .fecthcartResults()
         .then((onValue) => CartModel.fromJson(onValue));
   }
+
+
 @override
   Future<Products> getProducts(int pageNumber) async {
     //todo change here
@@ -57,10 +61,11 @@ class ApiRepository extends BaseRepository {
         .getFlashAPI()
         .then((onValue) => FlashProducts.fromJson(onValue));
   }
+
 @override
   Future<AddToCart> postAddToCart(String hash) async {
     //todo change here
-    return DashboardApiManager()
+    return CartAPIProvider()
         .addToCart(hash)
         .then((onValue) => AddToCart.fromJson(onValue));
   }

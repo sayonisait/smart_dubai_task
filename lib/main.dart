@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:awok_starter/ui/pages/HomePageOld.dart';
 
 void main() {
+  print("came to main.dart");
     Injector.configure(Flavor.Network);
     runApp(AwokApp());
 }
